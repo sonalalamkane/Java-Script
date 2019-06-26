@@ -1,0 +1,43 @@
+body
+{
+    margin: 0px auto;
+}
+.login_div{
+    background-color: rgb(182, 172, 226);
+    width: 500px;
+    text-align: center;
+    font-size: 18px;
+    margin: 0px auto;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    border-radius: 10px;
+}
+#h3{
+    background-color: black;
+    color: white;
+    margin-bottom: 0px;
+}
+.text_box{
+    margin-left: 10px;
+    height: 27px;
+    width: 250px;
+    margin-top: 18px;
+    border-radius: 5px;
+}
+#h5{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.login_content a{
+    text-decoration: none;
+}
+#login{
+    padding: 3px 10px;
+    margin-right: 45px;
+    margin-bottom: 20px;
+}
+#cancel{
+    padding: 3px 10px;
+    margin-left: 45px;
+}
