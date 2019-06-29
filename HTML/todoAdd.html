@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../CSS/todoAdd.css">
+        <script src="../Java script/validation_registration.js"></script>
+    </head>
+    <body>
+        <form>
+            <div class="todo_nav">
+
+                <div class="Navbar">
+                    <a href="../index.html">Home</a>
+                    <a href="./HTML/#">Profile Details</a>
+                    <a onclick="logout()">Logout</a>
+                </div>
+            </div>
+        
+            <div>
+                <input id="todoDesc" type="text" name="TodoDescription"><br><br>
+                
+                <select id="todoCat">
+                    <option value="office">Office</option>
+                    <option value="personal">Personal</option>
+                  </select><br>
+
+                <input id="todoDueDate" type="date" name="dueDate"><br><br>
+                <input id="todoRemainder" type="date" name=setRemainder><br><br>
+
+                <h5 required>isPublic :
+                    <input type="radio" name="public_selection" value="Yes" checked> Yes
+                    <input type="radio" name="public_selection" value="No"> No<br>
+                
+                <input id="save" type="submit" value="Add" onclick="AddTodo();">            
+            </div>
+        </form>
+    </body>
+</html>

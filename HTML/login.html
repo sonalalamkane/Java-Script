@@ -1,6 +1,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="../CSS/login.css">
+        <script src="../Java script/validation_registration.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet"> 
     </head>
     <body>
@@ -9,10 +10,10 @@
                 <h3>Login</h3>
             </div>
             <div class="login_content">
-                    <h5 id="h5"><input class="text_box" type="text" name="fname" placeholder="Username"></h5>
-                    <h5 id="h5"><input class="text_box" type="password" name="password" placeholder="Password"><br><br></h5>
-                    <a href="profile.html"><input id="login" type="submit" value="login"></a>
-                    <a href="index.html"><input id="cancel" type="submit" value="cancel"></a>
+                    <h5 id="h5"><input id="lEmail" class="text_box" type="text" name="fname" placeholder="Email"></h5>
+                    <h5 id="h5"><input id="lPassword" class="text_box" type="password" name="password" placeholder="Password"><br><br></h5>
+                    <input id="login" type="submit" value="login" onclick="loginValidation();">
+                    <a href="../index.html"><input id="cancel" type="button" value="cancel"></a>
             </div>
         </div>
     </body>

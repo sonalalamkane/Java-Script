@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../CSS/todo.css">
+        <script src="../Java script/validation_registration.js"></script>
+    </head>
+    <body onload="onLoadData()">
+        <form>
+            <div class="todo_nav">
+
+                <div class="Navbar">
+                    <a href="../index.html">Home</a>
+                    <a href="./HTML/#">Profile Details</a>
+                    <a onclick="logout()">Logout</a>
+                </div>
+            </div>
+        
+            <div class="buttons">
+<!--            <input id="addTodo" type="text">-->
+                <input id="add_button" type="submit" value="Add" onclick="AddTodo();">
+                <input id="delete_button" type="button" value="Delete" onclick="DeleteTodo();">
+                <input id="edit_button" type="button" value="Edit" onclick="EditTodo();">
+            </div>
+            <div class="allFields">
+                <input id="todoDesc" type="text" name="TodoDescription"><br><br>
+                
+                <select id="todoCat">
+                    <option value="office">Office</option>
+                    <option value="personal">Personal</option>
+                </select><br>
+    
+                <input id="todoDueDate" type="date" name="dueDate"><br><br>
+                <input id="todoRemainder" type="date" name=setRemainder><br><br>
+    
+                <h5 required>isPublic :
+                    <input type="radio" name="public_selection" value="Yes" checked> Yes
+                    <input type="radio" name="public_selection" value="No"> No<br>        
+            </div>
+
+            <section id="readTodo">
+                <table id="output" style="width:100%">
+                    <tbody id="bodytable">
+                        <tr>
+                            <th>Delete</th>
+                            <th>ToDo Description</th>
+                            <th>Category</th> 
+                            <th>Due Date</th>
+                            <th>Remainder Date</th>
+                            <th>is Public</th>
+                        </tr>
+                    </tbody>
+                  </table>
+            </section> 
+        </form>
+    </body>
+</html>
