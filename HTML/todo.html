@@ -6,7 +6,6 @@
     <body onload="onLoadData()">
         <form>
             <div class="todo_nav">
-
                 <div class="Navbar">
                     <a href="../index.html">Home</a>
                     <a href="./HTML/#">Profile Details</a>
@@ -14,39 +13,53 @@
                 </div>
             </div>
         
+            <div class="search">
+                    <input type="text" id="search_text" name="search_here">
+                    <input type="button" value="Search" onclick="Search();">
+                    <select id="category" onchange="filter();">
+                            <option value="All">All</option>
+                            <option value="Office">Office</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Date">Date</option>
+                    </select>
+                </div>
+
             <div class="buttons">
-<!--            <input id="addTodo" type="text">-->
+                <div class="allFields">
+                        <input id="todoDesc" type="text" name="TodoDescription" required><br><br>
+                        
+                        <select id="todoCat">
+                            <option value="Office">Office</option>
+                            <option value="Personal">Personal</option>
+                        </select><br>
+            
+                        <input id="todoDueDate" type="date" name="dueDate" required><br><br>
+                        <input id="todoRemainder" type="date" name=setRemainder><br><br>
+            
+                        <h5 required>isPublic :</h5>
+                            <input type="radio" name="public_selection" value="Yes" checked> Yes
+                            <input type="radio" name="public_selection" value="No"> No<br>        
+                </div>
+        
                 <input id="add_button" type="submit" value="Add" onclick="AddTodo();">
                 <input id="delete_button" type="button" value="Delete" onclick="DeleteTodo();">
                 <input id="edit_button" type="button" value="Edit" onclick="EditTodo();">
+                <input id="save_button" type="button" value="Save" onclick="SaveTodo();">
             </div>
-            <div class="allFields">
-                <input id="todoDesc" type="text" name="TodoDescription"><br><br>
-                
-                <select id="todoCat">
-                    <option value="office">Office</option>
-                    <option value="personal">Personal</option>
-                </select><br>
-    
-                <input id="todoDueDate" type="date" name="dueDate"><br><br>
-                <input id="todoRemainder" type="date" name=setRemainder><br><br>
-    
-                <h5 required>isPublic :
-                    <input type="radio" name="public_selection" value="Yes" checked> Yes
-                    <input type="radio" name="public_selection" value="No"> No<br>        
-            </div>
-
+            
             <section id="readTodo">
-                <table id="output" style="width:100%">
+                <table id="output" style="width:100%" border="1">
                     <tbody id="bodytable">
-                        <tr>
-                            <th>Delete</th>
-                            <th>ToDo Description</th>
-                            <th>Category</th> 
-                            <th>Due Date</th>
-                            <th>Remainder Date</th>
-                            <th>is Public</th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>Delete</th>
+                                <th>ToDo Description</th>
+                                <th>Category</th> 
+                                <th>Due Date</th>
+                                <th>Remainder Date</th>
+                                <th>is Public</th>
+                            </tr>
+                        </thead>
                     </tbody>
                   </table>
             </section> 

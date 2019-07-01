@@ -9,17 +9,20 @@ body{
     width:100%;
     margin: 0%;
 }
-.logo{
-    width: 79px;
-    height: 48px;
-    float: left;
-}
+
 a{
     float: left;
     color: white;
     text-decoration: none;
     padding: 15px 40px;
     text-align: center;
+}
+
+.search{
+    float: left;
+    margin-right:50px;
+    margin-top:10px;
+    
 }
 
 a:hover{
@@ -39,4 +42,7 @@ a:hover{
 #edit_button{
     margin-top:15px;
     padding: 10px 15px;
+}
+#todoDesc{
+    margin-top: 20px;
 }

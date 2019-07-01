@@ -1,14 +1,14 @@
 body
 {
     margin: 0px auto;
+    background-image: url(../Images/back.jpg);
 }
 .register_div{
-    background-color: antiquewhite;
-    width: 1000px;
-    text-align: center;
+    background-color: white;
+    width: 791px;    text-align: center;
     font-size: 18px;
     margin: 0px auto;
-    height: 573px;
+    height: 611px;
     font-family: 'Montserrat', sans-serif;
 
 }
@@ -28,14 +28,13 @@ body
     background-color: rgb(209, 202, 202);
     width: 50%;
     margin: auto auto;
-    height: 477px;
+    height: 522px;
+    border-radius: 30px;
 }
 #gender{
-    padding-right: 10px;
     font-size: 15px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    height: 47px;
+    margin-top: 14px;
+    margin-bottom: 14px;
 }
 #pp{
     height: 100px;
@@ -53,11 +52,26 @@ body
 }
 #regi{
     float: left;
-    margin-left: 93px;
+    margin-left: 88px;
     padding: 9px 25px;
+    border-radius: 8px;
+    color: white;
+    background-color: rgb(240, 57, 57);
+    font-size: 16px;
+}
+
+#regi:hover{
+    background-color: black;
 }
 #cancel{
     float: right;
-    margin-right: 93px;
+    margin-right: 88px;
     padding: 9px 25px;
+    border-radius: 8px;
+    color: white;
+    background-color: rgb(240, 57, 57);
+    font-size: 16px;
+}
+#cancel:hover{
+    background-color: black;
 }
