@@ -9,7 +9,11 @@ body{
     width:100%;
     margin: 0%;
 }
-
+.logo{
+    width: 79px;
+    height: 48px;
+    float: left;
+}
 a{
     float: left;
     color: white;
@@ -19,12 +23,14 @@ a{
 }
 
 .search{
-    float: left;
+    float: center;
     margin-right:50px;
     margin-top:10px;
-    
 }
+#search_button{
+    padding: 6px 10px;
 
+}
 a:hover{
     background-color: green;
 }
@@ -45,4 +51,14 @@ a:hover{
 }
 #todoDesc{
     margin-top: 20px;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1px solid black;
+  }
+#Date_filter{
+    display: none;
 }

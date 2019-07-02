@@ -1,36 +1,38 @@
 <html>
     <head>
-        <link rel="stylesheet" href="../CSS/todoAdd.css">
+        <link rel="stylesheet" href="../CSS/profile.css">
         <script src="../Java script/validation_registration.js"></script>
     </head>
-    <body>
+    <body onload="profileView();">
         <form>
             <div class="todo_nav">
-
+                <img class= "logo" src="../Images/ttt.jpg">
                 <div class="Navbar">
                     <a href="../index.html">Home</a>
-                    <a href="./HTML/#">Profile Details</a>
+                    <a href="../HTML/todo.html">Todo List</a>
                     <a onclick="logout()">Logout</a>
                 </div>
             </div>
-        
-            <div>
-                <input id="todoDesc" type="text" name="TodoDescription"><br><br>
-                
-                <select id="todoCat">
-                    <option value="office">Office</option>
-                    <option value="personal">Personal</option>
-                  </select><br>
+            <div class="textBoxes">
+                <div class="profile_img">
+                    <img id="pp" src="../Images/profile.png" height="150px" width="150px">
+                    <input id="brows" type="file" name="Brows" onchange="profile_image();">
+                </div>
 
-                <input id="todoDueDate" type="date" name="dueDate"><br><br>
-                <input id="todoRemainder" type="date" name=setRemainder><br><br>
-
-                <h5 required>isPublic :
-                    <input type="radio" name="public_selection" value="Yes" checked> Yes
-                    <input type="radio" name="public_selection" value="No"> No<br>
+                <input id="fname" class="text_box" type="text" name="fname" placeholder="First name">
+                <input id="lname" class="text_box" type="text" name="lname" placeholder="Last name">
+                <input id="email" class="text_box" type="text" name="email" placeholder="Email">
+                <input id="address" class="text_box" type="text" name="addr" placeholder="Address">
+                <h5 id="gender">Gender :
+                    <input type="radio" name="gender_selection" value="Male"> Male
+                    <input type="radio" name="gender_selection" value="Female"> Female
+                    <input type="radio" name="gender_selection" value="Other"> Other</h5>
                 
-                <input id="save" type="submit" value="Add" onclick="AddTodo();">            
+                <input type="button" id="edit"  value="Edit" onclick="EditProfile();">
+                <input type="button" id="save"  value="Save" onclick="SaveProfile();">
+
             </div>
+            
         </form>
     </body>
 </html>

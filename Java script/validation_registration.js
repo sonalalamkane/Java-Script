@@ -1,4 +1,4 @@
-function validation()                                 //Registration Validation
+function validation()                                          //Registration Validation
 {
     let fname=document.getElementById("fname").value;
     let lname=document.getElementById("lname").value;
@@ -14,21 +14,21 @@ function validation()                                 //Registration Validation
     if(fname.match(alphabetsRE) && lname.match(alphabetsRE))                                         //fname,lname validation.
     {
         window.confirm("Please enter correct first name and last name."); 
-        window.open("../HTML/register.html","_self");     
+        window.location.assign("../HTML/register.html");     
     }
     else
     {
         if(strongRegex.test(password)==false)                                                              //password validation.
         {  
             window.confirm("Please enter correct password"); 
-            window.open("../HTML/register.html","_self");  
+            window.location.assign("../HTML/register.html");  
         }
         else
         {
             if (ereg.test(email) == false) 
             {
                 window.confirm("Please enter correct email address.");
-                window.open("../HTML/register.html","_blank"); 
+                window.location.assign("../HTML/register.html"); 
             } 
             else
             {
@@ -41,6 +41,7 @@ function validation()                                 //Registration Validation
 
 function localstorage_registration()                           //Registration local storage
 {
+
     let fname=document.getElementById("fname").value;
     let lname=document.getElementById("lname").value;
     let email=document.getElementById("email").value; 
@@ -50,8 +51,17 @@ function localstorage_registration()                           //Registration lo
 
     let userobj= new Object();
     let todo_add=[];
+    let pp = sessionStorage.profile_image;
 
-    userobj={"firstName" : fname,"lastName" : lname,"emailId" : email,"pass" : password,"addr" : address,"genderr" : gen,"todo_list" : todo_add};
+    userobj={"firstName" : fname,
+              "lastName" : lname,
+              "emailId" : email,
+              "pass" : password,
+              "addr" : address,
+              "genderr" : gen,
+              "todo_list" : todo_add,
+              "profile" : pp
+            };
     
     let arrayOfUser= JSON.parse(localStorage.getItem("user_details"));
 
@@ -62,7 +72,7 @@ function localstorage_registration()                           //Registration lo
         string_data=JSON.stringify(arrayOfUser);
         localStorage.setItem("user_details",string_data);
 
-        window.open("../HTML/login.html","_blank");
+        window.location.assign("../HTML/login.html");
     }
     else
     {
@@ -86,7 +96,7 @@ function localstorage_registration()                           //Registration lo
         else    //user is exists
         {
             window.confirm("Email address already exist.");
-            window.open("../HTML/register.html","_self");
+            window.location.assign("../HTML/register.html");
         }
     }    
 }
@@ -106,7 +116,7 @@ function loginValidation()                                      //Login page
             if(loginEmail==getLoginData[i].emailId && loginPass==getLoginData[i].pass)
             {
                 sessionStorage.setItem("sessionId",i);                        //session
-                window.open("../HTML/todo.html","_blank");
+                window.location.assign("../HTML/todo.html");
                 break;
             }
         }
@@ -114,9 +124,20 @@ function loginValidation()                                      //Login page
     else
     {
         window.confirm("Invalid Email or Password...");
-        window.open("../HTML/login.html","_blank"); 
+        window.location.assign("../HTML/login.html"); 
     }    
 }
+
+function loginRedirect()
+{
+    let getId=sessionStorage.sessionId;
+
+    if(getId != null)
+    {
+        window.location.assign("../HTML/todo.html");
+    }
+}
+
 function onLoadData()                                           //when page load display todo list
 {
     let getId=sessionStorage.sessionId;
@@ -126,6 +147,7 @@ function onLoadData()                                           //when page load
 
     Display(get_inner_array);
 }
+
 function AddTodo()                                              //Add Todo
 {
     let lSession = sessionStorage.sessionId;
@@ -136,8 +158,16 @@ function AddTodo()                                              //Add Todo
     let isPublic = document.querySelector('input[name="public_selection"]:checked').value; 
 
     let addObj = new Object();
-    addObj = {"todoDesc" : todoDesc,"cat":category,"dDate":dueDate,"rdate":remainder,"ispublic":isPublic};
+    addObj = {"id" : id,
+              "todoDesc" : todoDesc,
+              "cat":category,
+              "dDate":dueDate,
+              "rdate":remainder,
+              "ispublic":isPublic,
+              "status" : "Pending"
+            };
 
+    
     let TodoItem = JSON.parse(localStorage.getItem("user_details"));
 
     TodoItem[lSession].todo_list.push(addObj);
@@ -150,7 +180,7 @@ function AddTodo()                                              //Add Todo
     {
         var tr=document.createElement("tr");
 
-        rData="<tr><td><input type=checkbox name=delete id=checkDelete"+i+"></input>+</td><td>"+get_inner_array[i].todoDesc+"</td><td>"+get_inner_array[i].cat+"</td><td>"+get_inner_array[i].dDate+"</td><td>"+get_inner_array[i].rdate+"</td><td>"+get_inner_array[i].ispublic+"</td></tr>";
+        rData="<tr><td><input type=checkbox name=delete id=checkDelete"+i+"></input>+</td><td>"+get_inner_array[i].todoDesc+"</td><td>"+get_inner_array[i].cat+"</td><td>"+get_inner_array[i].dDate+"</td><td>"+get_inner_array[i].rdate+"</td><td>"+get_inner_array[i].ispublic+"</td><td>"+arr[i].status+"</td></tr>";
 
         tr.innerHTML=rData;
         let tdata=document.getElementById("bodytable");
@@ -158,13 +188,13 @@ function AddTodo()                                              //Add Todo
     }
     onLoadData();
 }  
-function DeleteTodo()                                       //Delete Todo
+
+function DeleteTodo()                                            //Delete Todo
 {
     let getId=sessionStorage.sessionId;
     let getUserData=JSON.parse(localStorage.getItem("user_details"));
     let checkedIndex=document.getElementsByName("delete");
     let get_inner_array=getUserData[getId].todo_list;
-    let flag=0;
 
     for(var i=(get_inner_array.length-1);i>=0;i--)
     {
@@ -186,10 +216,10 @@ function DeleteTodo()                                       //Delete Todo
     localStorage.setItem("user_details",todolist);
     onLoadData();
 }
+
 function EditTodo()                                                 //Edit Todo
 {
     let getId=sessionStorage.sessionId;
-
     let getUserData=JSON.parse(localStorage.getItem("user_details"));
     let get_todo_array=getUserData[getId].todo_list;
     let flag=0;
@@ -225,7 +255,8 @@ function EditTodo()                                                 //Edit Todo
         }
     }
 }
-function SaveTodo()                                                   //Save Todo
+
+function SaveTodo()                                                  //Save Todo
 {
     let getId = sessionStorage.sessionId;
     let getIndex=sessionStorage.index_todo;
@@ -248,25 +279,71 @@ function SaveTodo()                                                   //Save Tod
     string_data=JSON.stringify(getUserData);
     localStorage.setItem("user_details",string_data);
 }
-function filter()                                                     //Filter Todo's
+
+function filter_category()                                           //Filter Todo's
 {
     let getId=sessionStorage.sessionId;
     let getCatagory=document.getElementById("category").value;
 
     let getUserData=JSON.parse(localStorage.getItem("user_details"));
-    let get_todo_array=getUserData[getId].todo_list;
+    let category_array=getUserData[getId].todo_list;
 
-    let cat=[];
-    for(let i=0;i<get_todo_array.length;i++)
+    if(getCatagory == "AllTodo")
     {
-        if(getCatagory == get_todo_array[i].cat)
-        {
-            cat.push(get_todo_array[i]);
-        }   
+        onLoadData();
     }
-    Display(cat);
+    else if(getCatagory == "Office")
+    {
+        var filter_todo=category_array.filter(function(category_type){
+            return(category_type.cat === "Office")
+            })
+
+            Display(filter_todo);
+    }
+    else if(getCatagory == "Personal")
+    {
+        var filter_todo=category_array.filter(function(category_type){
+            return(category_type.cat === "Personal")
+            })
+            Display(filter_todo);
+    } 
+    else if(getCatagory == "Done")
+    {
+        var filter_todo=category_array.filter(function(category_type){
+            return(category_type.status === "Done")
+            })
+            Display(filter_todo);
+    }
+    else if(getCatagory == "Pending")
+    {
+        var filter_todo=category_array.filter(function(category_type){
+            return(category_type.status === "Pending")
+            })
+            Display(filter_todo);
+    }
+    else if(getCatagory == "Date")
+    {
+        document.getElementById("Date_filter").style.display = "block";
+    }
 }
-function Search()                                              //Search Todo's
+
+function filte_date()
+{
+    let getId=sessionStorage.sessionId;
+    let getUserData=JSON.parse(localStorage.getItem("user_details"));
+    let category_array=getUserData[getId].todo_list;
+
+   // document.getElementById("dateFilter").style.display = "none";
+    let filterDate = document.getElementById("dateFilter").value;
+
+    var result = category_array.filter(function(number) {
+        return ((number.dDate).toString() == (filterDate).toString())
+      });
+
+    Display(result);
+}
+
+function Search()                                                    //Search Todo's
 {
     let getSearch=document.getElementById("search_text").value;
     let getId=sessionStorage.sessionId;
@@ -282,33 +359,47 @@ function Search()                                              //Search Todo's
             searchResult.push(get_todo_array[i]);
         }
     }
-    Display(searchResult);
-}   
-function Display(arr)                                          //Display data in table
-{
-    if(arr.length === 0)
+    if(searchResult != 0)
     {
-        let s=document.createElement("tr");
-        var node = document.createTextNode("no todos");
-        s.appendChild(node);
-        let data=document.getElementById("output");
-        data.appendChild(s);
+        Display(searchResult);
     }
     else
     {
-        let table_body=document.getElementById("bodytable");
-        let deleterow=table_body.lastElementChild;
-        while(deleterow)
+        window.confirm("No result found.");
+        onLoadData();
+    }
+}   
+
+function Display(arr)                                                 //Display data in table
+{
+    if(arr.length === 0)
+    {
+        for(let i = document.getElementById("output").rows.length; i > 1;i--)
         {
-            table_body.removeChild(deleterow);
-            deleterow=table_body.lastElementChild;
+            document.getElementById("output").deleteRow(i -1);
+        }
+   
+        var tr=document.createElement("tr");
+            
+        rData="<tr>"+"no todos"+"</tr>";
+
+        tr.innerHTML=rData;
+        let data=document.getElementById("bodytable");
+        data.appendChild(tr);
+         
+    }
+    else
+    {
+        for(let i = document.getElementById("output").rows.length; i > 1;i--)
+        {
+            document.getElementById("output").deleteRow(i -1);
         }
  
         for(let i=0;i<arr.length;i++)
         {
             var tr=document.createElement("tr");
             
-            rData="<tr><td><input type=checkbox name=delete id=checkDelete"+i+"></input></td><td>"+arr[i].todoDesc+"</td><td>"+arr[i].cat+"</td><td>"+arr[i].dDate+"</td><td>"+arr[i].rdate+"</td><td>"+arr[i].ispublic+"</td></tr>";
+            rData="<tr><td><input type=checkbox name=delete id=checkDelete"+i+"></input></td><td>"+arr[i].todoDesc+"</td><td>"+arr[i].cat+"</td><td>"+arr[i].dDate+"</td><td>"+arr[i].rdate+"</td><td>"+arr[i].ispublic+"</td><td>"+arr[i].status+"</td></tr>";
 
             tr.innerHTML=rData;
             let data=document.getElementById("bodytable");
@@ -317,9 +408,157 @@ function Display(arr)                                          //Display data in
     }
 }
 
-function logout()                                  //session clear
+function profileView()                                                //View profile and disable fields
+{
+    let getId=sessionStorage.sessionId;
+    let profile=sessionStorage.profile_image;
+    let getUserData=JSON.parse(localStorage.getItem("user_details"));
+
+    document.getElementById("fname").value=getUserData[getId].firstName;
+    document.getElementById("lname").value=getUserData[getId].lastName;
+    document.getElementById("email").value=getUserData[getId].emailId;
+    document.getElementById("address").value=getUserData[getId].addr;
+    document.getElementById("pp").src=getUserData[getId].profile;
+
+    if(getUserData[getId].genderr == "Male")
+    {
+        document.getElementsByName("gender_selection")[0].checked=true;
+    }
+    else if(getUserData[getId].genderr == "Female")
+    {
+        document.getElementsByName("gender_selection")[1].checked=true;
+    }
+    else if(getUserData[getId].genderr == "Other")
+    {
+        document.getElementsByName("gender_selection")[2].checked=true;
+    }
+
+    document.getElementById("fname").disabled = true;
+    document.getElementById("lname").disabled = true;
+    document.getElementById("email").disabled = true;
+    document.getElementById("address").disabled = true;
+    document.getElementById("brows").disabled = true;
+
+    for(let i = 0; i< document.getElementsByName("gender_selection").length; i++)
+    {
+        document.getElementsByName("gender_selection")[i].disabled = true;
+    }
+}
+
+function EditProfile()                                                  //Enable fields and access values
+{
+    let getId=sessionStorage.sessionId;
+    let getUserData=JSON.parse(localStorage.getItem("user_details"));
+
+    document.getElementById("fname").value=getUserData[getId].firstName;
+    document.getElementById("lname").value=getUserData[getId].lastName;
+    document.getElementById("email").value=getUserData[getId].emailId;
+    document.getElementById("address").value=getUserData[getId].addr;
+    document.getElementById("pp").value=getUserData[getId].profile;
+
+    if(getUserData[getId].genderr == "Male")
+    {
+        document.getElementsByName("gender_selection")[0].checked=true;
+    }
+    else if(getUserData[getId].genderr == "Female")
+    {
+        document.getElementsByName("gender_selection")[1].checked=true;
+    }
+    else if(getUserData[getId].genderr == "Other")
+    {
+        document.getElementsByName("gender_selection")[2].checked=true;
+    }
+
+    document.getElementById("fname").disabled = false;
+    document.getElementById("lname").disabled = false;
+    document.getElementById("email").disabled = false;
+    document.getElementById("address").disabled = false;
+    document.getElementById("brows").disabled = false;
+
+    for(let i = 0; i< document.getElementsByName("gender_selection").length; i++)
+    {
+        document.getElementsByName("gender_selection")[i].disabled = false;
+    }
+}
+
+function SaveProfile()
+{
+    let getId=sessionStorage.sessionId;
+    let profile_pic=sessionStorage.profile_image;
+    let getUserData=JSON.parse(localStorage.getItem("user_details"));
+
+    let fname=document.getElementById("fname").value;
+    let lname=document.getElementById("lname").value;
+    let email=document.getElementById("email").value; 
+    let address =document.getElementById("address").value; 
+    let gen=document.querySelector('input[name="gender_selection"]:checked').value; 
+
+    getUserData[getId].firstName = fname;
+    getUserData[getId].lastName = lname;
+    getUserData[getId].emailId = email;
+    getUserData[getId].addr = address;
+    getUserData[getId].genderr = gen;
+    getUserData[getId].profile= profile_pic;
+
+    string_data=JSON.stringify(getUserData);
+    localStorage.setItem("user_details",string_data);
+    profileView();
+}
+
+function Done_status()
+{
+    let getId=sessionStorage.sessionId;
+    let getUserData=JSON.parse(localStorage.getItem("user_details"));
+    let get_todo_array=getUserData[getId].todo_list;
+    let checkedBox= document.getElementsByName("delete");
+
+    for(var i=(get_todo_array.length-1);i>=0;i--)
+    {
+        if(checkedBox[i].checked === true)
+        {
+            get_todo_array[i].status = "Done";
+        }
+    }
+    let msg = confirm("Record status changed to Done.")
+    if(msg == true)
+    {
+        string_data=JSON.stringify(getUserData);
+        localStorage.setItem("user_details",string_data);
+        onLoadData();
+    }
+    else
+    {
+        onLoadData();
+    }
+}  
+
+function logout()                                                      //session clear
 {
     sessionStorage.clear();
     window.open("../HTML/login.html","_self");
 }
-//<button onclick="deleteTodo();">Delete</button>
+
+function profile_image()
+{
+    let profile = document.getElementById("brows").files[0];
+
+    getimgbase64(profile);
+
+    function getimgbase64(profile)
+    {
+        let read_img = new FileReader();
+        read_img.readAsDataURL(profile);
+
+        read_img.onload = function () {
+            let profile_url = read_img.result;
+            sessionStorage.setItem("profile_image",profile_url);
+            document.getElementById("pp").src = sessionStorage.profile_image;
+        };
+
+        read_img.onerror = function (error) {
+        };
+    }
+}
+
+
+
