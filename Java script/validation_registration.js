@@ -7,35 +7,36 @@ function validation()                                          //Registration Va
     let address =document.getElementById("address").value; 
     let gen=document.querySelector('input[name="gender_selection"]:checked').value; 
 
-    let alphabetsRE= /^[^a-zA-Z]+$/;
+    let alphabetsRE= /^[a-zA-Z]+$/;
     var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
     let ereg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
     if(fname.match(alphabetsRE) && lname.match(alphabetsRE))                                         //fname,lname validation.
     {
-        window.confirm("Please enter correct first name and last name."); 
-        window.location.assign("../HTML/register.html");     
-    }
-    else
-    {
-        if(strongRegex.test(password)==false)                                                              //password validation.
+        if (ereg.test(email) == true)                                                            //password validation.
         {  
-            window.confirm("Please enter correct password"); 
-            window.location.assign("../HTML/register.html");  
-        }
-        else
-        {
-            if (ereg.test(email) == false) 
+            if(strongRegex.test(password)==true)  
             {
-                window.confirm("Please enter correct email address.");
-                window.location.assign("../HTML/register.html"); 
+                window.confirm("Registration Successful");
+                window.location = "../HTML/login.html";
+                localstorage_registration();
             } 
             else
             {
-                window.confirm("Registration Successful");
-                localstorage_registration();
+                window.confirm("Please enter correct password"); 
+                window.location ="../HTML/register.html"; 
             }
         }
+        else
+        {
+            window.confirm("Please enter correct email address.");
+            window.location = "../HTML/register.html";  
+        }
+    }
+    else
+    {
+        window.confirm("Please enter correct first name and last name."); 
+        window.location = "../HTML/register.html";     
     }    
 }
 
@@ -72,7 +73,7 @@ function localstorage_registration()                           //Registration lo
         string_data=JSON.stringify(arrayOfUser);
         localStorage.setItem("user_details",string_data);
 
-        window.location.assign("../HTML/login.html");
+        window.location = "../HTML/login.html";
     }
     else
     {
@@ -96,7 +97,7 @@ function localstorage_registration()                           //Registration lo
         else    //user is exists
         {
             window.confirm("Email address already exist.");
-            window.location.assign("../HTML/register.html");
+            window.location = "../HTML/register.html";
         }
     }    
 }
@@ -116,7 +117,7 @@ function loginValidation()                                      //Login page
             if(loginEmail==getLoginData[i].emailId && loginPass==getLoginData[i].pass)
             {
                 sessionStorage.setItem("sessionId",i);                        //session
-                window.location.assign("../HTML/todo.html");
+                window.location = "../HTML/todo.html";
                 break;
             }
         }
@@ -124,7 +125,7 @@ function loginValidation()                                      //Login page
     else
     {
         window.confirm("Invalid Email or Password...");
-        window.location.assign("../HTML/login.html"); 
+        window.location = "../HTML/login.html"; 
     }    
 }
 
@@ -134,7 +135,7 @@ function loginRedirect()
 
     if(getId != null)
     {
-        window.location.assign("../HTML/todo.html");
+        window.location = "../HTML/todo.html";
     }
 }
 
@@ -151,23 +152,39 @@ function onLoadData()                                           //when page load
 function AddTodo()                                              //Add Todo
 {
     let lSession = sessionStorage.sessionId;
+    let sDate = startDate();
     let todoDesc = document.getElementById("todoDesc").value;
     let category = document.getElementById("todoCat").value;
     let dueDate = document.getElementById("todoDueDate").value;
     let remainder = document.getElementById("todoRemainder").value;
     let isPublic = document.querySelector('input[name="public_selection"]:checked').value; 
+       
+    var id=makeid(6);
+    function makeid(length) 
+    {
+        var result           = '';
+        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+
+        for ( var i = 0; i < length; i++ )
+        {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+    
+        return result;
+    }
 
     let addObj = new Object();
     addObj = {"id" : id,
               "todoDesc" : todoDesc,
-              "cat":category,
-              "dDate":dueDate,
-              "rdate":remainder,
-              "ispublic":isPublic,
+              "cat" : category,
+              "sDate" : sDate,
+              "dDate" : dueDate,
+              "rdate" : remainder,
+              "ispublic" : isPublic,
               "status" : "Pending"
             };
 
-    
     let TodoItem = JSON.parse(localStorage.getItem("user_details"));
 
     TodoItem[lSession].todo_list.push(addObj);
@@ -180,34 +197,53 @@ function AddTodo()                                              //Add Todo
     {
         var tr=document.createElement("tr");
 
-        rData="<tr><td><input type=checkbox name=delete id=checkDelete"+i+"></input>+</td><td>"+get_inner_array[i].todoDesc+"</td><td>"+get_inner_array[i].cat+"</td><td>"+get_inner_array[i].dDate+"</td><td>"+get_inner_array[i].rdate+"</td><td>"+get_inner_array[i].ispublic+"</td><td>"+arr[i].status+"</td></tr>";
+        rData="<tr><td><input type=checkbox name=delete id=checkbox-"+get_inner_array[i].id+"></input>+</td><td>"+get_inner_array[i].todoDesc+"</td><td>"+get_inner_array[i].cat+"</td><td>"+get_inner_array[i].sDate+"</td><td>"+get_inner_array[i].dDate+"</td><td>"+get_inner_array[i].rdate+"</td><td>"+get_inner_array[i].ispublic+"</td><td>"+get_inner_array[i].status+"</td></tr>";
 
         tr.innerHTML=rData;
         let tdata=document.getElementById("bodytable");
         tdata.appendChild(tr);
     }
+    
     onLoadData();
 }  
+
+function startDate()
+{
+    var today = new Date();
+    
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; 
+    var yyyy = today.getFullYear();
+
+    if(dd<10) 
+    {
+        dd='0'+dd;
+    } 
+
+    if(mm<10) 
+    {
+        mm='0'+mm;
+    } 
+
+    today = yyyy+'-'+mm+'-'+dd;
+    return today;
+} 
 
 function DeleteTodo()                                            //Delete Todo
 {
     let getId=sessionStorage.sessionId;
     let getUserData=JSON.parse(localStorage.getItem("user_details"));
-    let checkedIndex=document.getElementsByName("delete");
     let get_inner_array=getUserData[getId].todo_list;
 
-    for(var i=(get_inner_array.length-1);i>=0;i--)
+    let arr=checkedBoxes();
+
+    for(var i=0;i<arr.length;i++)
     {
-        if(checkedIndex[i].checked === true)
+        for(let j=0;j<get_inner_array.length;j++)
         {
-            let msg=confirm("Do you want to Delete ?");
-            if(msg==true)
+            if(get_inner_array[j].id == arr[i])
             {
-                get_inner_array.splice(i,1);
-            }
-            else
-            {
-                location.reload();
+                get_inner_array.splice(j,1);
             }
         }
     }
@@ -217,36 +253,33 @@ function DeleteTodo()                                            //Delete Todo
     onLoadData();
 }
 
+function checkedBoxes()
+{
+    let checkedIndex=document.getElementsByName("delete");
+
+    let cbox=[];
+    for(var i=0;i<checkedIndex.length;i++)
+    {
+        var todoSid=checkedIndex[i].id;
+        var todoId = todoSid.split("-");
+
+        if(document.getElementById("checkbox-"+todoId[1]).checked == true)
+        {
+            cbox.push(todoId[1]);
+        }
+    }
+    return cbox;
+
+}
+
 function EditTodo()                                                 //Edit Todo
 {
     let getId=sessionStorage.sessionId;
     let getUserData=JSON.parse(localStorage.getItem("user_details"));
-    let get_todo_array=getUserData[getId].todo_list;
-    let flag=0;
-    let checkedBox= document.getElementsByName("delete");
+    let get_inner_array=getUserData[getId].todo_list;
+    let checkedBox= checkedBoxes();
 
-    for(var i=(get_todo_array.length-1);i>=0;i--)
-    {
-        if(checkedBox[i].checked === true)
-        {
-            sessionStorage.setItem("index_todo",i);
-            document.getElementById("todoDesc").value=get_todo_array[i].todoDesc;
-            document.getElementById("todoCat").value=get_todo_array[i].cat;
-            document.getElementById("todoDueDate").value=get_todo_array[i].dDate;
-            document.getElementById("todoRemainder").value=get_todo_array[i].rdate;
-            
-            if(get_todo_array[i].ispublic == "Yes")
-            {
-                document.getElementsByName("public_selection")[0].checked=true;
-            }
-            else if(get_todo_array[i].ispublic == "No")
-            {
-                document.getElementsByName("public_selection")[1].checked=true;
-            }
-            flag++;
-        }
-    }
-    if(flag>1)
+    if(checkedBox.length>1)
     {
         let msg=confirm("Please select only one checkbox.");
         if(msg== true || msg==false)
@@ -254,6 +287,29 @@ function EditTodo()                                                 //Edit Todo
             location.reload();
         }
     }
+    else
+    {
+        for(let j=0;j<get_inner_array.length;j++)
+        {
+            if(get_inner_array[j].id == checkedBox)
+            {
+                sessionStorage.setItem("index_todo",checkedBox);
+                document.getElementById("todoDesc").value=get_inner_array[j].todoDesc;
+                document.getElementById("todoCat").value=get_inner_array[j].cat;
+                document.getElementById("todoDueDate").value=get_inner_array[j].dDate;
+                document.getElementById("todoRemainder").value=get_inner_array[j].rdate;
+                    
+                if(get_inner_array[j].ispublic == "Yes")
+                {
+                    document.getElementsByName("public_selection")[0].checked=true;
+                }
+                else if(get_inner_array[j].ispublic == "No")
+                {
+                    document.getElementsByName("public_selection")[1].checked=true;
+                }
+            }
+        }
+    }   
 }
 
 function SaveTodo()                                                  //Save Todo
@@ -270,14 +326,24 @@ function SaveTodo()                                                  //Save Todo
     let getUserData = JSON.parse(localStorage.getItem("user_details"));
     let get_todo_array=getUserData[getId].todo_list;
 
-    get_todo_array[getIndex].todoDesc=todoDesc;
-    get_todo_array[getIndex].cat=category;
-    get_todo_array[getIndex].dDate=dueDate;
-    get_todo_array[getIndex].rdate=remainder;
-    get_todo_array[getIndex].ispublic=isPublic;
+    for(let i=0;i<get_todo_array.length;i++)
+    {
+        if(get_todo_array[i].id == getIndex)
+        {
+            get_todo_array[i].todoDesc=todoDesc;
+            get_todo_array[i].cat=category;
+            get_todo_array[i].dDate=dueDate;
+            get_todo_array[i].rdate=remainder;
+            get_todo_array[i].ispublic=isPublic;
 
-    string_data=JSON.stringify(getUserData);
-    localStorage.setItem("user_details",string_data);
+            string_data=JSON.stringify(getUserData);
+            localStorage.setItem("user_details",string_data);
+
+            document.getElementById("myForm").reset();
+            onLoadData();
+        }
+    }
+    
 }
 
 function filter_category()                                           //Filter Todo's
@@ -290,6 +356,7 @@ function filter_category()                                           //Filter To
 
     if(getCatagory == "AllTodo")
     {
+        document.getElementById("Date_filter").style.display = "none";
         onLoadData();
     }
     else if(getCatagory == "Office")
@@ -298,6 +365,7 @@ function filter_category()                                           //Filter To
             return(category_type.cat === "Office")
             })
 
+            document.getElementById("Date_filter").style.display = "none";
             Display(filter_todo);
     }
     else if(getCatagory == "Personal")
@@ -305,6 +373,8 @@ function filter_category()                                           //Filter To
         var filter_todo=category_array.filter(function(category_type){
             return(category_type.cat === "Personal")
             })
+
+            document.getElementById("Date_filter").style.display = "none";
             Display(filter_todo);
     } 
     else if(getCatagory == "Done")
@@ -312,6 +382,8 @@ function filter_category()                                           //Filter To
         var filter_todo=category_array.filter(function(category_type){
             return(category_type.status === "Done")
             })
+
+            document.getElementById("Date_filter").style.display = "none";
             Display(filter_todo);
     }
     else if(getCatagory == "Pending")
@@ -319,6 +391,7 @@ function filter_category()                                           //Filter To
         var filter_todo=category_array.filter(function(category_type){
             return(category_type.status === "Pending")
             })
+            document.getElementById("Date_filter").style.display = "none";
             Display(filter_todo);
     }
     else if(getCatagory == "Date")
@@ -327,18 +400,27 @@ function filter_category()                                           //Filter To
     }
 }
 
-function filte_date()
+function filte_date()                                                //Date Filter
 {
     let getId=sessionStorage.sessionId;
     let getUserData=JSON.parse(localStorage.getItem("user_details"));
-    let category_array=getUserData[getId].todo_list;
+    let tood_array=getUserData[getId].todo_list;
 
-   // document.getElementById("dateFilter").style.display = "none";
-    let filterDate = document.getElementById("dateFilter").value;
+    let fromtDate = document.getElementById("fromDateFilter").value;
+    let toDate = document.getElementById("toDateFilter").value;
 
-    var result = category_array.filter(function(number) {
-        return ((number.dDate).toString() == (filterDate).toString())
+    let fdate = Date.parse(fromtDate);
+    let tdate = Date.parse(toDate);
+
+    if((fdate) > (tdate))
+    {
+        window.alert("From date is greater than To date.");
+    }
+
+    var result = tood_array.filter(function(rangeFilter) {
+        return ((Date.parse(rangeFilter.sDate)) >= fdate && (Date.parse(rangeFilter.sDate) <= tdate));
       });
+
 
     Display(result);
 }
@@ -361,18 +443,20 @@ function Search()                                                    //Search To
     }
     if(searchResult != 0)
     {
+        document.getElementById("myForm").reset();
         Display(searchResult);
     }
     else
     {
         window.confirm("No result found.");
+        document.getElementById("myForm").reset();
         onLoadData();
     }
 }   
 
 function Display(arr)                                                 //Display data in table
 {
-    if(arr.length === 0)
+    if(arr.length == 0)
     {
         for(let i = document.getElementById("output").rows.length; i > 1;i--)
         {
@@ -386,7 +470,6 @@ function Display(arr)                                                 //Display 
         tr.innerHTML=rData;
         let data=document.getElementById("bodytable");
         data.appendChild(tr);
-         
     }
     else
     {
@@ -399,7 +482,7 @@ function Display(arr)                                                 //Display 
         {
             var tr=document.createElement("tr");
             
-            rData="<tr><td><input type=checkbox name=delete id=checkDelete"+i+"></input></td><td>"+arr[i].todoDesc+"</td><td>"+arr[i].cat+"</td><td>"+arr[i].dDate+"</td><td>"+arr[i].rdate+"</td><td>"+arr[i].ispublic+"</td><td>"+arr[i].status+"</td></tr>";
+            rData="<tr><td><input type=checkbox name=delete id=checkbox-"+arr[i].id+"></input></td><td>"+arr[i].todoDesc+"</td><td>"+arr[i].cat+"</td><td>"+arr[i].sDate+"</td><td>"+arr[i].dDate+"</td><td>"+arr[i].rdate+"</td><td>"+arr[i].ispublic+"</td><td>"+arr[i].status+"</td></tr>";
 
             tr.innerHTML=rData;
             let data=document.getElementById("bodytable");
@@ -510,13 +593,17 @@ function Done_status()
     let getId=sessionStorage.sessionId;
     let getUserData=JSON.parse(localStorage.getItem("user_details"));
     let get_todo_array=getUserData[getId].todo_list;
-    let checkedBox= document.getElementsByName("delete");
+    
+    let checkedBox=checkedBoxes();
 
-    for(var i=(get_todo_array.length-1);i>=0;i--)
+    for(var i=0;i<checkedBox.length;i++)
     {
-        if(checkedBox[i].checked === true)
+        for(let j=0;j<get_todo_array.length;j++)
         {
-            get_todo_array[i].status = "Done";
+            if(get_todo_array[j].id == checkedBox[i])
+            {
+                get_todo_array[j].status = "Done";
+            }
         }
     }
     let msg = confirm("Record status changed to Done.")
@@ -555,10 +642,6 @@ function profile_image()
             document.getElementById("pp").src = sessionStorage.profile_image;
         };
 
-        read_img.onerror = function (error) {
-        };
+        read_img.onerror = function (error) {};
     }
 }
-
-
-

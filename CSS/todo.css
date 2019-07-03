@@ -49,9 +49,15 @@ a:hover{
     margin-top:15px;
     padding: 10px 15px;
 }
-#todoDesc{
-    margin-top: 20px;
+#save_button{
+    margin-top:15px;
+    padding: 10px 15px;
 }
+#status_button{
+    margin-top:15px;
+    padding: 10px 15px;
+}
+
 table{
     width: 100%;
     border-collapse: collapse;
