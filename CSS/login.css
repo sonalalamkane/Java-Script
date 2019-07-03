@@ -4,28 +4,30 @@ body
     background-image: url(../Images/back.jpg);
 }
 .login_div{
-    background-color:rgb(126, 230, 67);
+    background-color: white;
     width: 500px;
     text-align: center;
     font-size: 18px;
     margin: 111px auto;
     font-family: 'Montserrat', sans-serif;
-    border-radius: 10px;
+    border-radius: 32px;
 }
-#h3{
+h3{
     background-color: black;
     color: white;
+    border-radius: 20px;
+    margin-top: 0px;
     margin-bottom: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .text_box{
     margin-left: 10px;
     height: 27px;
     width: 314px;
     margin-top: 18px;
-    border-radius: 5px;
+    border-radius: 8px;
 }
-
-
 .login_content a{
     text-decoration: none;
 }
@@ -35,20 +37,20 @@ body
     padding: 9px 25px;
     border-radius: 8px;
     color: white;
-    background-color: rgb(240, 57, 57);
+    background-color: black;
     font-size: 16px;
 }
 #login:hover{
-    background-color: black;
+    background-color: rgb(240, 57, 57);
 }
 #cancel{
     margin-bottom: 20px;
     padding: 9px 25px;
     border-radius: 8px;
     color: white;
-    background-color: rgb(240, 57, 57);
+    background-color: black;
     font-size: 16px;
 }
 #cancel:hover{
-    background-color: black;
+    background-color: rgb(240, 57, 57);
 }
