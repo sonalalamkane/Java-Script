@@ -15,8 +15,6 @@ function validation()                                          //Registration Va
         {  
             if(strongRegex.test(password)==true)  
             {
-                window.confirm("Registration Successful");
-                window.location = "../HTML/login.html";
                 localstorage_registration();
             } 
             else
@@ -71,6 +69,7 @@ function localstorage_registration()                           //Registration lo
         string_data=JSON.stringify(arrayOfUser);
         localStorage.setItem("user_details",string_data);
 
+        window.confirm("Registration Successful");
         window.location = "../HTML/login.html";
     }
     else
@@ -91,6 +90,9 @@ function localstorage_registration()                           //Registration lo
             arrayOfUser.push(userobj);
             string_data=JSON.stringify(arrayOfUser);
             localStorage.setItem("user_details",string_data);
+
+            window.confirm("Registration Successful");
+            window.location = "../HTML/login.html";
         }
         else    //user is exists
         {
