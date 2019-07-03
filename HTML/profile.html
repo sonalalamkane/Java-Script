@@ -6,13 +6,17 @@
     <body onload="profileView();">
         <form>
             <div class="todo_nav">
-                <img class= "logo" src="../Images/ttt.jpg">
+                <div id="heading">
+                    <h2>TODO</h2>
+                </div>
+
                 <div class="Navbar">
                     <a href="../index.html">Home</a>
                     <a href="../HTML/todo.html">Todo List</a>
                     <a onclick="logout()">Logout</a>
                 </div>
             </div>
+
             <div class="textBoxes">
                 <div class="profile_img">
                     <img id="pp" src="../Images/profile.png" height="150px" width="150px">
@@ -28,9 +32,8 @@
                     <input type="radio" name="gender_selection" value="Female"> Female
                     <input type="radio" name="gender_selection" value="Other"> Other</h5>
                 
-                <input type="button" id="edit"  value="Edit" onclick="EditProfile();">
-                <input type="button" id="save"  value="Save" onclick="SaveProfile();">
-
+                <input class="buttons" type="button" id="edit"  value="Edit" onclick="EditProfile();">
+                <input class="buttons" type="button" id="save"  value="Save" onclick="SaveProfile();">
             </div>
             
         </form>

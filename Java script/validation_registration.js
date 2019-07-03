@@ -4,9 +4,7 @@ function validation()                                          //Registration Va
     let lname=document.getElementById("lname").value;
     let email=document.getElementById("email").value; 
     let password=document.getElementById("password").value;
-    let address =document.getElementById("address").value; 
-    let gen=document.querySelector('input[name="gender_selection"]:checked').value; 
-
+    
     let alphabetsRE= /^[a-zA-Z]+$/;
     var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
     let ereg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -501,7 +499,7 @@ function profileView()                                                //View pro
     document.getElementById("lname").value=getUserData[getId].lastName;
     document.getElementById("email").value=getUserData[getId].emailId;
     document.getElementById("address").value=getUserData[getId].addr;
-    document.getElementById("pp").src=getUserData[getId].profile;
+    document.getElementById("pp").src=getUserData[getId].profile ? getUserData[getId].profile : '../Images/profile.png';
 
     if(getUserData[getId].genderr == "Male")
     {
@@ -582,7 +580,8 @@ function SaveProfile()
     getUserData[getId].addr = address;
     getUserData[getId].genderr = gen;
     getUserData[getId].profile= profile_pic;
-
+    
+   
     string_data=JSON.stringify(getUserData);
     localStorage.setItem("user_details",string_data);
     profileView();

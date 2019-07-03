@@ -7,35 +7,39 @@
 
         <form id="myForm">
             <div class="todo_nav">
-                <img class= "logo" src="../Images/ttt.jpg">
+                <div id="heading">
+                    <h2>TODO</h2>
+                </div>
                 <div class="Navbar">
                     <a href="../index.html">Home</a>
                     <a href="../HTML/profile.html">Profile Details</a>
                     <a onclick="logout()">Logout</a>
                 </div>
             </div>
-        
-            <div class="search">
-                <input type="text" id="search_text" name="search_here">
-                <input type="button" id="search_button" value="Search" onclick="Search();">
 
-                <h5>Select Category : <select id="category" onchange="filter_category();">
-                    <option value="AllTodo" selected>All todo</option>
-                    <option value="Office">Office</option>
-                    <option value="Personal">Personal</option>
-                    <option value="Done">Done</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Date">Date</option>
-                </select></h5>
-                <div id="Date_filter">
-                    From Date : <input id="fromDateFilter" type="date" name="date_filter">
-                    To Date : <input id="toDateFilter" type="date" name="Due_date_filter">
-                    <input id="date_button" type="button" value="Filter Date" onclick="filte_date();">
+            <div class="todo_fields">
+
+                <div class="search">
+                    <input type="text" id="search_text" name="search_here">
+                    <input type="button" id="search_button" value="Search" onclick="Search();">
                 </div>
-            </div>
 
-            <div class="buttons">
                 <div class="allFields">
+                    <h5>Select Category : <select id="category" onchange="filter_category();">
+                        <option value="AllTodo" selected>All todo</option>
+                        <option value="Office">Office</option>
+                        <option value="Personal">Personal</option>
+                        <option value="Done">Done</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Date">Date</option>
+                    </select></h5>
+
+                    <div id="Date_filter">
+                        <h5>From Date : <input id="fromDateFilter" type="date" name="date_filter"></h5>
+                        <h5>To Date : <input id="toDateFilter" type="date" name="Due_date_filter"></h5>
+                        <input id="date_button" type="button" value="Filter Date" onclick="filte_date();">
+                    </div>
+
                     <h5>Todo Description : <input id="todoDesc" type="text" name="TodoDescription" required></h5>
                         
                     <h5>Todo Category : <select id="todoCat">
@@ -43,22 +47,24 @@
                         <option value="Personal">Personal</option>
                     </select><br></h5>
             
-                    <h5>Todo Due Date : <input id="todoDueDate" type="date" name="dueDate" required><br><br>
-                    Todo Remainder Date : <input id="todoRemainder" type="date" name=setRemainder><br></h5>
+                    <h5>Todo Due Date : <input id="todoDueDate" type="date" name="dueDate" required><br></h5>
+                    <h5>Todo Remainder Date : <input id="todoRemainder" type="date" name=setRemainder><br></h5>
             
                     <h5 required>isPublic :
                         <input type="radio" name="public_selection" value="Yes" checked> Yes
                         <input type="radio" name="public_selection" value="No"> No </h5>      
-                </div>
-        
-                <input id="add_button" type="submit" value="Add" onclick="AddTodo();">
-                <input id="delete_button" type="button" value="Delete" onclick="DeleteTodo();">
-                <input id="edit_button" type="button" value="Edit" onclick="EditTodo();">
-                <input id="save_button" type="button" value="Save" onclick="SaveTodo();">
-                <input id="status_button" type="button" value="Mark as Done" onclick="Done_status();">
+                    </div>
+                
+                <div class="allButtons">
+                    <input class="buttons" id="add_button" type="submit" value="Add" onclick="AddTodo();">
+                    <input class="buttons" id="delete_button" type="button" value="Delete" onclick="DeleteTodo();">
+                    <input class="buttons" id="edit_button" type="button" value="Edit" onclick="EditTodo();">
+                    <input class="buttons" id="save_button" type="button" value="Save" onclick="SaveTodo();">
+                    <input class="buttons" id="status_button" type="button" value="Mark as Done" onclick="Done_status();">
+                </div><br>
 
-            </div><br>
-            
+            </div>
+
             <section id="readTodo">
                 <table id="output">
                     <tbody id="bodytable">

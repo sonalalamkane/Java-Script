@@ -21,43 +21,39 @@ a{
     padding: 15px 40px;
     text-align: center;
 }
-
+#heading h2{
+    float: left;
+    color: white;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    margin-left: 63px;
+}
 .search{
-    float: center;
+    text-align: center;
     margin-right:50px;
     margin-top:10px;
+    width: 400px;
 }
 #search_button{
     padding: 6px 10px;
-
 }
 a:hover{
     background-color: green;
+    border-radius: 30px;
 }
 .Navbar{
     float: right;
 }
-#add_button{
-    margin-top:15px;
-    padding: 10px 15px;
-}
-#delete_button{
-    margin-top:15px;
-    padding: 10px 15px;
-}
-#edit_button{
-    margin-top:15px;
-    padding: 10px 15px;
-}
-#save_button{
-    margin-top:15px;
-    padding: 10px 15px;
-}
 #status_button{
-    margin-top:15px;
     padding: 10px 15px;
+    background-color:black;
+    color: white;
+    border-radius: 12px;
 }
-
+#status_button:hover{
+    background-color: rgb(27, 82, 27);
+    color: white;
+}
 table{
     width: 100%;
     border-collapse: collapse;
@@ -67,4 +63,31 @@ table, th, td {
   }
 #Date_filter{
     display: none;
+}
+.todo_fields{
+    background-color: white(175, 163, 163);
+    margin: auto auto;
+    width: 400px;
+    text-align: left;
+}
+.buttons{
+    padding: 10px 15px;
+    background-color:black;
+    color: white;
+    border-radius: 12px;
+}
+.buttons:hover{
+    background-color: rgb(243, 95, 95);
+    color: black;
+}
+.allButtons{
+    width: 416px;
+}
+#search_text{
+    border-radius: 8px;
+    height: 30px;
+}
+#todoDesc{
+    border-radius: 8px;
+    height: 30px;
 }

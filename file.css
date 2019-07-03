@@ -27,8 +27,15 @@ a{
 
 a:hover{
     background-color: green;
+    border-radius: 30px;
 }
 .navbar{
     float: right;
 }
-
+#heading h2{
+    float: left;
+    color: white;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    margin-left: 63px;
+}
