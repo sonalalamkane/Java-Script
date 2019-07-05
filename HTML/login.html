@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../CSS/login.css">
+    <script src="../Java script/login.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body onload="loginRedirect();">
+    <form>
+        <div class="login_div">
+            <div id="h3">
+                <h3>Login</h3>
+            </div>
+            <div class="login_content">
+                <input id="lEmail" class="text_box" type="text" name="fname" placeholder="Email">
+                <input id="lPassword" class="text_box" type="password" name="password" placeholder="Password"><br><br>
+
+                <input id="login" type="submit" value="login" onclick="loginValidation();">
+                <a href="../index.html"><input id="cancel" type="button" value="cancel"></a>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

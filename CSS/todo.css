@@ -1,0 +1,109 @@
+body{
+    margin: 0%;
+    text-align: center;
+}
+.todo_nav
+{
+    background-color:black;
+    display:inline-block;
+    width:100%;
+    margin: 0%;
+}
+.logo{
+    width: 79px;
+    height: 48px;
+    float: left;
+}
+.Navbar a{
+    float: left;
+    color: white;
+    text-decoration: none;
+    padding: 15px 40px;
+    text-align: center;
+}
+#heading h2{
+    float: left;
+    color: white;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    margin-left: 63px;
+}
+.pageName h4{
+    margin: 10px auto;
+    font-size: 25px;
+}
+.search{
+    margin : 0px auto;
+    width: 678px;
+    height: 60.1px;
+}
+#search_button{
+    padding: 6px 10px;
+    margin-right: 10px;
+}
+a:hover{
+    background-color: green;
+    border-radius: 30px;
+}
+.Navbar{
+    float: right;
+}
+#status_button{
+    padding: 10px 15px;
+    background-color:black;
+    color: white;
+    border-radius: 12px;
+}
+#status_button:hover{
+    background-color: rgb(27, 82, 27);
+    color: white;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1px solid black;
+  }
+#Date_filter{
+    display: none;
+}
+.todo_fields{
+    background-color: white(175, 163, 163);
+    margin: auto auto;
+
+}
+.buttons{
+    padding: 10px 15px;
+    background-color:black;
+    color: white;
+    border-radius: 12px;
+}
+.buttons:hover{
+    background-color: rgb(243, 95, 95);
+    color: black;
+}
+.allButtons{
+    width: 416px;
+    margin: 20px auto;
+}
+#search_text{
+    border-radius: 8px;
+    height: 30px;  
+}
+#todoDesc{
+    border-radius: 8px;
+    height: 30px;
+}
+.search h5{
+    width:300px;
+    display: inline-block;
+}
+h5 {
+    font-size: 15px;
+}
+.allFields h5{
+    display: inline-block;
+    margin-top: 15px;
+    margin-bottom: 0px;
+}

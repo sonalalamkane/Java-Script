@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../CSS/register.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <script src="../Java script/registration.js"></script>
+</head>
+
+<body>
+    <form class="register_div" method="post">
+        <div id="h3">
+            <h3>Registration</h3>
+        </div>
+        <div class="fields">
+            <img id="pp" src="../Images/profile.png" height="150px" width="150px">
+            <input id="brows" type="file" name="Brows" onchange="profile_image();">
+
+            <input id="fname" class="text_box" type="text" name="fname" placeholder="First name" onclick="clearHighlightedBox('fname');" required>
+            <input id="lname" class="text_box" type="text" name="lname" placeholder="Last name" onclick="clearHighlightedBox('lname');"required>
+            <input id="email" class="text_box" type="text" name="email" placeholder="Email" onclick="clearHighlightedBox('email');"required>
+            <input id="password" class="text_box" type="password" name="password" placeholder="Password" onclick="clearHighlightedBox('password');"required>
+            <input id="address" class="text_box" type="text" name="addr" placeholder="Address">
+            <h5 id="gender" required>Gender :
+                <input type="radio" name="gender_selection" value="Male"> Male
+                <input type="radio" name="gender_selection" value="Female" checked> Female
+                <input type="radio" name="gender_selection" value="Other"> Other</h5>
+
+            <input type="button" id="regi" value="register" onclick="validation();">
+            <a href="../index.html"><input id="cancel" type="button" value="cancel"></a>
+
+        </div>
+
+    </form>
+</body>
+
+</html>

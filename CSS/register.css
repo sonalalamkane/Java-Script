@@ -1,0 +1,76 @@
+body
+{
+    margin: 0px auto;
+    background-image: url(../Images/back.jpg);
+}
+.register_div{
+    background-color: white;
+    width: 791px;    text-align: center;
+    font-size: 18px;
+    margin: 0px auto;
+    height: 611px;
+    font-family: 'Montserrat', sans-serif;
+}
+#h3{
+    font-size: 25px;
+    background-color: black;
+    color: white;
+}
+.text_box{
+    margin-left: 10px;
+    height: 27px;
+    width: 341px;
+    margin-top: 18px;
+    border-radius: 5px;
+}
+.fields{
+    background-color: rgb(209, 202, 202);
+    width: 50%;
+    margin: auto auto;
+    height: 522px;
+    border-radius: 30px;
+}
+#gender{
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
+#pp{
+    height: 100px;
+    width: 100px;
+    margin-top: 18px;
+    border-radius: 50%;
+    text-align: center;
+}
+#brows{
+    margin-top: 18px;
+    padding: 3px 20px;
+}
+.fields a{
+    text-decoration: none;
+}
+#regi{
+    float: left;
+    margin-left: 88px;
+    padding: 9px 25px;
+    border-radius: 8px;
+    color: white;
+    background-color: rgb(240, 57, 57);
+    font-size: 16px;
+}
+
+#regi:hover{
+    background-color: black;
+}
+#cancel{
+    float: right;
+    margin-right: 88px;
+    padding: 9px 25px;
+    border-radius: 8px;
+    color: white;
+    background-color: rgb(240, 57, 57);
+    font-size: 16px;
+}
+#cancel:hover{
+    background-color: black;
+}
