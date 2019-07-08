@@ -3,9 +3,14 @@ function onLoadData()                                           //when page load
     let getId = sessionStorage.sessionId;
     let userArray = JSON.parse(localStorage.getItem("user_details"));
 
-    let getTodoArray = userArray[getId].todo_list;
-
-    DisplayTodo(getTodoArray);
+    if (getId == null) {
+        window.location = "../index.html";
+        return false;
+    }
+    else {
+        let getTodoArray = userArray[getId].todo_list;
+        DisplayTodo(getTodoArray);
+    }
 }
 
 function AddTodo()                                              //Add Todo
@@ -31,7 +36,6 @@ function AddTodo()                                              //Add Todo
         return result;
     }
 
-
     let addObj = {
         "id": id,
         "todoDesc": todoDesc,
@@ -43,25 +47,31 @@ function AddTodo()                                              //Add Todo
         "status": "Pending"
     };
 
-    let userArray = JSON.parse(localStorage.getItem("user_details"));
-
-    userArray[lSession].todo_list.push(addObj);
-    addTodo = JSON.stringify(userArray);
-    localStorage.setItem("user_details", addTodo);
-
-    let todoArray = userArray[lSession].todo_list;
-
-    for (let i = 0; i < todoArray.length; i++) {
-        var tr = document.createElement("tr");
-
-        rData = "<tr><td><input type=checkbox name=delete id=checkbox-" + todoArray[i].id + "></input>+</td><td>" + todoArray[i].todoDesc + "</td><td>" + todoArray[i].cat + "</td><td>" + todoArray[i].sDate + "</td><td>" + todoArray[i].dDate + "</td><td>" + todoArray[i].rdate + "</td><td>" + todoArray[i].ispublic + "</td><td>" + todoArray[i].status + "</td></tr>";
-
-        tr.innerHTML = rData;
-        let tdata = document.getElementById("bodytable");
-        tdata.appendChild(tr);
+    if (todoDesc == "" || category == "" || dueDate == "") {
+        window.confirm("Please insert the details either todo description or due date is empty.");
+        return false;
     }
+    else {
+        let userArray = JSON.parse(localStorage.getItem("user_details"));
 
-    onLoadData();
+        userArray[lSession].todo_list.push(addObj);
+        addTodo = JSON.stringify(userArray);
+        localStorage.setItem("user_details", addTodo);
+
+        let todoArray = userArray[lSession].todo_list;
+
+        for (let i = 0; i < todoArray.length; i++) {
+            var tr = document.createElement("tr");
+
+            rData = "<tr><td><input type=checkbox name=delete id=checkbox-" + todoArray[i].id + "></input>+</td><td>" + todoArray[i].todoDesc + "</td><td>" + todoArray[i].cat + "</td><td>" + todoArray[i].sDate + "</td><td>" + todoArray[i].dDate + "</td><td>" + todoArray[i].rdate + "</td><td>" + todoArray[i].ispublic + "</td><td>" + todoArray[i].status + "</td></tr>";
+
+            tr.innerHTML = rData;
+            let tdata = document.getElementById("bodytable");
+            tdata.appendChild(tr);
+        }
+
+        onLoadData();
+    }
 }
 
 function currentDate() {
@@ -356,5 +366,5 @@ function markAsDone() {
 function logout()                                                      //session clear
 {
     sessionStorage.clear();
-    window.open("../HTML/login.html", "_self");
+    window.location = "../HTML/login.html";
 }
