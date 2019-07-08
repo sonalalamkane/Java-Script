@@ -1,5 +1,4 @@
-function loginValidation()                                      //Login page
-{
+function loginValidation() {
     loginEmail = document.getElementById("lEmail").value;
     loginPass = document.getElementById("lPassword").value;
 
@@ -9,17 +8,15 @@ function loginValidation()                                      //Login page
         let getLoginData = JSON.parse(localStorage.getItem("user_details"));
         for (let i = 0; i < getLoginData.length; i++) {
             if (loginEmail == getLoginData[i].emailId && loginPass == getLoginData[i].pass) {
-                sessionStorage.setItem("sessionId", i);                        //session
+                sessionStorage.setItem("sessionId", i);
                 window.location = "../HTML/todo.html";
                 break;
-            }
-            else {
+            } else {
                 window.alert("Invalid Email or Password...");
                 return false;
             }
         }
-    }
-    else {
+    } else {
         window.confirm("Invalid Email or Password...");
         return false;
     }

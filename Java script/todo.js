@@ -1,20 +1,17 @@
-function onLoadData()                                           //when page load display todo list
-{
+function onLoadData() {
     let getId = sessionStorage.sessionId;
     let userArray = JSON.parse(localStorage.getItem("user_details"));
 
     if (getId == null) {
         window.location = "../index.html";
         return false;
-    }
-    else {
+    } else {
         let getTodoArray = userArray[getId].todo_list;
-        DisplayTodo(getTodoArray);
+        displayTable(getTodoArray);
     }
 }
 
-function AddTodo()                                              //Add Todo
-{
+function addTodo() {
     let lSession = sessionStorage.sessionId;
     let sDate = currentDate();
     let todoDesc = document.getElementById("todoDesc").value;
@@ -50,8 +47,7 @@ function AddTodo()                                              //Add Todo
     if (todoDesc == "" || category == "" || dueDate == "") {
         window.confirm("Please insert the details either todo description or due date is empty.");
         return false;
-    }
-    else {
+    } else {
         let userArray = JSON.parse(localStorage.getItem("user_details"));
 
         userArray[lSession].todo_list.push(addObj);
@@ -93,19 +89,17 @@ function currentDate() {
     return today;
 }
 
-function DeleteTodo()                                            //Delete Todo
-{
+function deleteTodo() {
     let getId = sessionStorage.sessionId;
     let userArray = JSON.parse(localStorage.getItem("user_details"));
     let todoArray = userArray[getId].todo_list;
 
-    let arr = checkedBoxes();
+    let arr = checkedRecords();
 
     let msg = confirm("Do you want to delete it ?")
     if (msg == false) {
         onLoadData();
-    }
-    else {
+    } else {
         for (var i = 0; i < arr.length; i++) {
             for (let j = 0; j < todoArray.length; j++) {
                 if (todoArray[j].id == arr[i]) {
@@ -120,7 +114,7 @@ function DeleteTodo()                                            //Delete Todo
     onLoadData();
 }
 
-function checkedBoxes() {
+function checkedRecords() {
     let checkedIndex = document.getElementsByName("delete");
 
     let cbox = [];
@@ -136,20 +130,18 @@ function checkedBoxes() {
 
 }
 
-function EditTodo()                                                 //Edit Todo
-{
+function editTodo() {
     let getId = sessionStorage.sessionId;
     let userArray = JSON.parse(localStorage.getItem("user_details"));
     let todoArray = userArray[getId].todo_list;
-    let checkedBox = checkedBoxes();
+    let checkedBox = checkedRecords();
 
     if (checkedBox.length > 1) {
-        let msg = confirm("Please select only one checkbox.");
+        let msg = confirm("Please select only one record.");
         if (msg == true || msg == false) {
             location.reload();
         }
-    }
-    else {
+    } else {
         for (let j = 0; j < todoArray.length; j++) {
             if (todoArray[j].id == checkedBox) {
                 sessionStorage.setItem("index_todo", checkedBox);
@@ -160,8 +152,7 @@ function EditTodo()                                                 //Edit Todo
 
                 if (todoArray[j].ispublic == "Yes") {
                     document.getElementsByName("public_selection")[0].checked = true;
-                }
-                else if (todoArray[j].ispublic == "No") {
+                } else if (todoArray[j].ispublic == "No") {
                     document.getElementsByName("public_selection")[1].checked = true;
                 }
             }
@@ -169,8 +160,7 @@ function EditTodo()                                                 //Edit Todo
     }
 }
 
-function SaveTodo()                                                  //Save Todo
-{
+function saveTodo() {
     let getId = sessionStorage.sessionId;
     let getIndex = sessionStorage.index_todo;
 
@@ -185,8 +175,7 @@ function SaveTodo()                                                  //Save Todo
 
     if (todoDesc == "" && (category == "Office" || category == "Personal") && dueDate == "" && remainder == "" && (isPublic == "Yes" || isPublic == "No")) {
         alert("Can't save todo because the fields are empty.");
-    }
-    else {
+    } else {
         for (let i = 0; i < todoArray.length; i++) {
             if (todoArray[i].id == getIndex) {
                 todoArray[i].todoDesc = todoDesc;
@@ -205,8 +194,7 @@ function SaveTodo()                                                  //Save Todo
     }
 }
 
-function filterCategory()                                           //Filter Todo's
-{
+function filterCategory() {
     let getId = sessionStorage.sessionId;
     let getCatagory = document.getElementById("category").value;
 
@@ -216,45 +204,39 @@ function filterCategory()                                           //Filter Tod
     if (getCatagory == "AllTodo") {
         document.getElementById("Date_filter").style.display = "none";
         onLoadData();
-    }
-    else if (getCatagory == "Office") {
+    } else if (getCatagory == "Office") {
         var filteredTodo = todoArray.filter(function (category_type) {
             return (category_type.cat === "Office")
         })
 
         document.getElementById("Date_filter").style.display = "none";
-        DisplayTodo(filteredTodo);
-    }
-    else if (getCatagory == "Personal") {
+        displayTable(filteredTodo);
+    } else if (getCatagory == "Personal") {
         var filteredTodo = todoArray.filter(function (category_type) {
             return (category_type.cat === "Personal")
         })
 
         document.getElementById("Date_filter").style.display = "none";
-        DisplayTodo(filteredTodo);
-    }
-    else if (getCatagory == "Done") {
+        displayTable(filteredTodo);
+    } else if (getCatagory == "Done") {
         var filteredTodo = todoArray.filter(function (category_type) {
             return (category_type.status === "Done")
         })
 
         document.getElementById("Date_filter").style.display = "none";
-        DisplayTodo(filteredTodo);
-    }
-    else if (getCatagory == "Pending") {
+        displayTable(filteredTodo);
+    } else if (getCatagory == "Pending") {
         var filteredTodo = todoArray.filter(function (category_type) {
             return (category_type.status === "Pending")
         })
         document.getElementById("Date_filter").style.display = "none";
-        DisplayTodo(filteredTodo);
-    }
-    else if (getCatagory == "Date") {
+        displayTable(filteredTodo);
+    } else if (getCatagory == "Date") {
         document.getElementById("Date_filter").style.display = "block";
     }
 }
 
-function dateFilter()                                                //Date Filter
-{
+function dateFilter() {
     let getId = sessionStorage.sessionId;
     let userArray = JSON.parse(localStorage.getItem("user_details"));
     let todoArray = userArray[getId].todo_list;
@@ -276,14 +258,12 @@ function dateFilter()                                                //Date Filt
     if (result == 0) {
         window.alert("no todo's found");
         document.getElementById("myForm").reset();
-    }
-    else {
-        DisplayTodo(result);
+    } else {
+        displayTable(result);
     }
 }
 
-function searchTodo()                                                    //Search Todo's
-{
+function searchTodo() {
     let getSearch = document.getElementById("search_text").value;
     let getId = sessionStorage.sessionId;
     let userArray = JSON.parse(localStorage.getItem("user_details"));
@@ -298,17 +278,15 @@ function searchTodo()                                                    //Searc
     }
     if (searchResult != 0) {
         document.getElementById("myForm").reset();
-        DisplayTodo(searchResult);
-    }
-    else {
+        displayTable(searchResult);
+    } else {
         window.confirm("No result found.");
         document.getElementById("myForm").reset();
         onLoadData();
     }
 }
 
-function DisplayTodo(arr)                                                 //Display data in table
-{
+function displayTable(arr) {
     if (arr.length == 0) {
         for (let i = document.getElementById("output").rows.length; i > 1; i--) {
             document.getElementById("output").deleteRow(i - 1);
@@ -321,8 +299,7 @@ function DisplayTodo(arr)                                                 //Disp
         tr.innerHTML = rData;
         let data = document.getElementById("bodytable");
         data.appendChild(tr);
-    }
-    else {
+    } else {
         for (let i = document.getElementById("output").rows.length; i > 1; i--) {
             document.getElementById("output").deleteRow(i - 1);
         }
@@ -344,7 +321,7 @@ function markAsDone() {
     let userArray = JSON.parse(localStorage.getItem("user_details"));
     let todoArray = userArray[getId].todo_list;
 
-    let checkedBox = checkedBoxes();
+    let checkedBox = checkedRecords();
 
     for (var i = 0; i < checkedBox.length; i++) {
         for (let j = 0; j < todoArray.length; j++) {
@@ -358,13 +335,11 @@ function markAsDone() {
         stringData = JSON.stringify(userArray);
         localStorage.setItem("user_details", stringData);
         onLoadData();
-    }
-    else {
+    } else {
         onLoadData();
     }
 }
-function logout()                                                      //session clear
-{
+function logout() {
     sessionStorage.clear();
     window.location = "../HTML/login.html";
 }

@@ -1,5 +1,4 @@
-function validation()                                          //Registration Validation
-{
+function validation() {
     let firstName = document.getElementById("fname").value;
     let lastName = document.getElementById("lname").value;
     let email = document.getElementById("email").value;
@@ -14,8 +13,7 @@ function validation()                                          //Registration Va
         document.getElementById("fname").style.backgroundColor = "rgb(255,0,0,0.8)";
         document.getElementById("fname").value = "Invalid first name.";
         return false;
-    }
-    else {
+    } else {
         document.getElementById("fname").style.backgroundColor = "rgb(0,128,0,0.8)";
     }
 
@@ -23,8 +21,7 @@ function validation()                                          //Registration Va
         document.getElementById("lname").style.backgroundColor = "rgb(255,0,0,0.8)";
         document.getElementById("lname").value = "Invalid last name.";
         return false;
-    }
-    else {
+    } else {
         document.getElementById("lname").style.backgroundColor = "rgb(0,128,0,0.8)";
     }
 
@@ -32,8 +29,7 @@ function validation()                                          //Registration Va
         document.getElementById("email").style.backgroundColor = "rgb(255,0,0,0.8)";
         document.getElementById("email").value = "Invalid email.";
         return false;
-    }
-    else {
+    } else {
         document.getElementById("email").style.backgroundColor = "rgb(0,128,0,0.8)";
     }
 
@@ -41,8 +37,7 @@ function validation()                                          //Registration Va
         document.getElementById("password").style.backgroundColor = "rgb(255,0,0,0.8)";
         document.getElementById("password").value = "Invalid password.";
         return false;
-    }
-    else {
+    } else {
         document.getElementById("password").style.backgroundColor = "rgb(0,128,0,0.8)";
     }
 
@@ -54,8 +49,7 @@ function clearHighlightedBox(idtext) {
     document.getElementById(idtext).value = "";
 }
 
-function useRegistration()                           //Registration local storage
-{
+function useRegistration() {
 
     let fName = document.getElementById("fname").value;
     let lName = document.getElementById("lname").value;
@@ -88,29 +82,23 @@ function useRegistration()                           //Registration local storag
 
         window.confirm("Registration Successful");
         window.location = "../HTML/login.html";
-    }
-    else {
+    } else {
         let index = 0;
 
-        //search for existing email id
         for (index = 0; index < arrayOfUser.length; index++) {
-            if (email == arrayOfUser[index].emailId)   // email id found then break
-            {
+            if (email == arrayOfUser[index].emailId) {
                 break;
             }
         }
 
-        if (index == arrayOfUser.length) // email address not found 
-        {
+        if (index == arrayOfUser.length) {
             arrayOfUser.push(userobj);
             string_data = JSON.stringify(arrayOfUser);
             localStorage.setItem("user_details", string_data);
 
             window.confirm("Registration Successful");
             window.location = "../HTML/login.html";
-        }
-        else    //user is exists
-        {
+        } else {
             document.getElementById("email").style.backgroundColor = "rgb(255,0,0,0.8)";
             document.getElementById("email").value = "Email already exist.";
             return false;

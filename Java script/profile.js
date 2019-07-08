@@ -1,5 +1,4 @@
-function profileView()                                                //View profile and disable fields
-{
+function profileView() {
     let getId = sessionStorage.sessionId;
     let getUserData = JSON.parse(localStorage.getItem("user_details"));
 
@@ -11,11 +10,9 @@ function profileView()                                                //View pro
 
     if (getUserData[getId].genderr == "Male") {
         document.getElementsByName("gender_selection")[0].checked = true;
-    }
-    else if (getUserData[getId].genderr == "Female") {
+    } else if (getUserData[getId].genderr == "Female") {
         document.getElementsByName("gender_selection")[1].checked = true;
-    }
-    else if (getUserData[getId].genderr == "Other") {
+    } else if (getUserData[getId].genderr == "Other") {
         document.getElementsByName("gender_selection")[2].checked = true;
     }
 
@@ -30,8 +27,7 @@ function profileView()                                                //View pro
     }
 }
 
-function EditProfile()                                                  //Enable fields and access values
-{
+function EditProfile() {
     let getId = sessionStorage.sessionId;
     let getUserData = JSON.parse(localStorage.getItem("user_details"));
 
@@ -43,11 +39,9 @@ function EditProfile()                                                  //Enable
 
     if (getUserData[getId].genderr == "Male") {
         document.getElementsByName("gender_selection")[0].checked = true;
-    }
-    else if (getUserData[getId].genderr == "Female") {
+    } else if (getUserData[getId].genderr == "Female") {
         document.getElementsByName("gender_selection")[1].checked = true;
-    }
-    else if (getUserData[getId].genderr == "Other") {
+    } else if (getUserData[getId].genderr == "Other") {
         document.getElementsByName("gender_selection")[2].checked = true;
     }
 
@@ -104,8 +98,7 @@ function profile_image() {
         read_img.onerror = function (error) { };
     }
 }
-function logout()                                                      //session clear
-{
+function logout() {
     sessionStorage.clear();
     window.open("../HTML/login.html", "_self");
 }
